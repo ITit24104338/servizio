@@ -35,6 +35,8 @@ import EditMenu from './Pages/Dashboard/Pages/Menu/EditMenu';
 import EditEvent from './Pages/Dashboard/Pages/Events/EditEvent';
 import EditStaff from './Pages/Dashboard/Pages/Staff/EditStaff';
 import EditPromo from './Pages/Dashboard/Pages/Promotions/Components/EditPromo';
+import AddMenu from './Pages/Dashboard/Pages/Menu/AddMenu';
+import AddTable from './Pages/Dashboard/Pages/Tables/AddTable';
 
 const App = () => {
   return (
@@ -71,9 +73,13 @@ const App = () => {
             <Route index element={<Orders />} />
             <Route path=":id" element={<OrderDetails />} />
           </Route>
-          <Route path="tables" element={<Tables />} />
+          <Route path="tables">
+            <Route index element={<Tables />} />
+            <Route path="new" element={<AddTable />} />
+          </Route>
           <Route path="menu">
             <Route index element={<Menu />} />
+            <Route path="add" element={<AddMenu />} />
             <Route path="edit/:id" element={<EditMenu />} />
           </Route>
           <Route path="ingredients">

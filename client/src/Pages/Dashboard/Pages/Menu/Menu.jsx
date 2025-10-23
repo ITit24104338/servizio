@@ -29,6 +29,10 @@ const Menu = () => {
     setMenus (data);
   };
 
+  const handleCreate = () => {
+    navigator ('/admin/menu/add');
+  };
+
   const handleEdit = menuId => {
     console.log ('Edit menu item:', menuId);
     navigator (`/admin/menu/edit/${menuId}`);
@@ -61,7 +65,15 @@ const Menu = () => {
       </div>
 
       <div className="px-12 py-6">
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Menu</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-4xl font-extrabold text-gray-800 mb-6">Menu</h1>
+          <button
+            className="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+            onClick={() => handleCreate ()}
+          >
+            Add New Menu Item
+          </button>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {menus.data.map (menu => (

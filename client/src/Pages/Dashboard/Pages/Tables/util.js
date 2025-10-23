@@ -10,6 +10,25 @@ const getTables = async (setTables, default_data) => {
     }
 };
 
+const createTable = async (capacity, status) => {
+    try {
+        const res = await fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "capacity": capacity,
+                "isAvailable": status
+            }),
+        });
+        return res.ok;
+    } catch (error) {
+        console.error('Error creating table:', error);
+        return false;
+    }
+};
+
 const reserveTable = async (table_id, setTables) => {
     try {
         const res = await fetch(`${URL}/${table_id}/reserve`, {
@@ -80,4 +99,4 @@ const deleteTable = async (table_id, setTables) => {
     }
 }
 
-export { getTables, reserveTable, releaseTable, deleteTable };
+export { getTables, createTable, reserveTable, releaseTable, deleteTable };

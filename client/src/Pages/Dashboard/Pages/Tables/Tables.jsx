@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import BreadCrumb from '../../../../Components/BradCrumb/BreadCrumb';
-import {CheckSquare, XSquare, RefreshCcw} from 'lucide-react';
+import {CheckSquare, XSquare, RefreshCcw, PlusCircle} from 'lucide-react';
 import {deleteTable, getTables, releaseTable, reserveTable} from './util';
+import {useNavigate} from 'react-router-dom';
 
 const Tables = () => {
   const default_data = {
@@ -17,6 +18,7 @@ const Tables = () => {
   };
 
   const [tables, setTables] = useState (default_data);
+  const navigate = useNavigate ();
 
   useEffect (() => {
     getTables (setTables, default_data);
@@ -30,6 +32,11 @@ const Tables = () => {
   const handleRelease = id => {
     releaseTable (id, setTables);
     console.log ('Release clicked for table ID:', id);
+  };
+
+  const handleCreate = () => {
+    console.log ('Create new table clicked');
+    navigate ('/admin/tables/new');
   };
 
   const handleDelete = id => {
@@ -51,9 +58,18 @@ const Tables = () => {
 
       {/* Page Content */}
       <div className="px-12 py-6">
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-6">
-          Tables
-        </h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-4xl font-extrabold text-gray-800 mb-6">
+            Tables
+          </h1>
+          <button
+            onClick={handleCreate}
+            className="flex items-center gap-2 px-4 py-2 bg-green-200 text-gray-700 font-semibold rounded-lg hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            <PlusCircle className="w-5 h-5" />
+            Add New Table
+          </button>
+        </div>
 
         <div className="w-full bg-white rounded-xl shadow-md overflow-x-auto">
           {tables.data && tables.data.length > 0
